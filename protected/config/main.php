@@ -91,5 +91,11 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+		'nav1'		=> array(
+						'Együttes'	=> 'site/ensemble',
+						'Csoportok'	=> 'group/index',
+						'Támogatók'	=> 'site/partners',
+						//'-width'	=> 100,
+					),
 	),
 );

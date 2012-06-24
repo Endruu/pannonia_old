@@ -100,4 +100,12 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+	
+	public function actionPartners() {
+		$this->render('partners');
+	}
+	
+	public function actionEnsemble() {
+		$this->render('ensemble');
+	}
 }

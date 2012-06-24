@@ -261,3 +261,7 @@ table.subnavigator {
     border-style: solid;
     border-radius: 4px;
     border-color: rgba(34, 15, 15, 0.5); }
+	
+.summary {
+	display: none;
+}

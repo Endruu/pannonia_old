@@ -51,7 +51,7 @@ class GroupController extends Controller
 	public function actionView($id)
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'data'=>$this->loadModel($id),
 		));
 	}
 

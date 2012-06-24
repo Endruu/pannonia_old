@@ -19,4 +19,17 @@ function wSplit($string, $maxlength) {
     return $string;
 }
 
+function subNavigator($link_hash, $current, $width = 100) {
+	$link_hash = Yii::app()->params[$link_hash];
+	echo "<table class='subnavigator'>\n  <tr>\n";
+	foreach ($link_hash as $key => $link) {
+		if($current == $key) {
+			echo "    <td width='$width'>", CHtml::link($key, array($link), array('class' => 'current') ), "</td>\n";
+		} else {
+			echo "    <td width='$width'>", CHtml::link($key, array($link) ), "</td>\n";
+		}
+	}
+	echo "  <tr>\n</table>\n";
+}
+
 ?>

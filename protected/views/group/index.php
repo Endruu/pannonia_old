@@ -9,7 +9,9 @@ $this->menu=array(
 );*/
 ?>
 
-<h1>Rólunk</h1>
+<h1>RÃ³lunk</h1>
+
+<?php subNavigator('nav1', 'Csoportok'); ?>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
