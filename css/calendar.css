@@ -1,0 +1,55 @@
+.minime_cal {
+	width: 126px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	display: table;
+	border: 1px solid;
+	border-radius: 10px;
+	border-color: rgba(150, 52, 44, 0.5);
+	background-color: rgba(199, 197, 167, 0.2);
+	
+}
+.minime_cal_head {
+	width: 126px;
+	padding: 1px;
+	text-align: center;
+	font-weight: 600;
+	font-size: 95%;
+
+}
+.minime_cal_week {
+	//margin: 1px;
+	text-align: center;
+	width: 16px;
+	height: 16px;
+	padding: 1px;
+	padding-bottom: 2px;
+	float: left;
+	font-weight: 600;
+	font-size: 70%;
+}
+
+.minime_cal_day {
+	//margin: 1px;
+	text-align: center;
+	width: 16px;
+	height: 15px;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-bottom: 0px;
+	float: left;
+	font-size: 70%;
+}
+
+.minime_cal_other{
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.minime_cal_today {
+	background-color: rgba(78, 108, 54, 0.7);
+	border: 0px;
+	border-radius: 5px;
+}

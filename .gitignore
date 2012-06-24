@@ -1,0 +1,7 @@
+
+/assets
+/images
+/protected/runtime
+*.png
+*.jpg
+*.gif
