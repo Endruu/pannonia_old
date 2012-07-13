@@ -73,8 +73,10 @@ return array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+					'class'			=> 'CFileLogRoute',
+					'levels'		=> 'trace, error, warning',
+					'maxLogFiles'	=> 3,
+					'maxFileSize'	=> 50,
 				),
 				// uncomment the following to show log messages on web pages
 				/*
@@ -97,5 +99,6 @@ return array(
 						'Támogatók'	=> 'site/partners',
 						//'-width'	=> 100,
 					),
+		'news_path'	=> YiiBase::getPathOfAlias('webroot') . 'assets/news',
 	),
 );
