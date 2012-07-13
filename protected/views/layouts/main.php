@@ -22,11 +22,14 @@
   <div class='left_motif_c' id='left_motif'></div>
   <div class='right_motif_c' id='right_motif'></div>
   <div class='left_c'>
-	<a href="notyet.html" class="menu" id="news"></a>
-	<a href="<?php echo $bUrl?>/index.php?r=about/egyuttes" class="menu" id="about"></a>
-	<a href="notyet.html" class='menu' id='galery'></a>
-	<a href="notyet.html" class='menu' id='messages'></a>
-	<a href="probak.php" class="menu" id="contact"></a>
+  <?php
+	echo
+		CHtml::link('', array('news/index'), array('class' => 'menu', 'id' => 'news') ), "\n",
+		CHtml::link('', array('site/ensemble'), array('class' => 'menu', 'id' => 'about') ), "\n",
+		CHtml::link('', array('galery/index'), array('class' => 'menu', 'id' => 'galery') ), "\n",
+		CHtml::link('', array('messageboard/index'), array('class' => 'menu', 'id' => 'messages') ), "\n",
+		CHtml::link('', array('site/contact'), array('class' => 'menu', 'id' => 'contact') ), "\n";
+  ?>
   </div>
   
   <div class='right_c'>

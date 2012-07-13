@@ -5,3 +5,4 @@
 *.png
 *.jpg
 *.gif
+/protected/extensions/editMe
