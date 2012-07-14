@@ -1,9 +1,9 @@
 <div class="news_wrapper" id="news_<?php echo $data->id; ?>">
 
 	<div class="news_header" >
-		<h3>
+		<h2>
 			<?php eh($data->title); ?>
-		</h3>
+		</h2>
 	</div>
 
 	<div class="news_content">
@@ -19,9 +19,11 @@
 
 		<div class="news_author">
 			<?php
+				if($data->modified_by)
+					echo "Eredeti: ";
 				eh($data->author->name); 
 				if($data->modified_by) {
-					echo "<br />\nLegutóbb módosítva:\n";
+					echo "<br />\nLegutÃ³bb mÃ³dosÃ­tva:\n";
 					eh($data->modifier->name);
 				}
 			?>
@@ -31,7 +33,7 @@
 			<?php
 				eh($data->created_at); 
 				if($data->modified_at) {
-					echo "<br /><br />\n";
+					echo "<br />\n";
 					eh($data->modified_at);
 				}
 			?>

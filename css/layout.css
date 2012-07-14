@@ -242,6 +242,11 @@ table.subnavigator {
   border-style: solid;
   border-radius: 4px;
   border-color: rgba(34, 15, 15, 0.5); }
+  
+.group_nav {
+  margin-top: 20px;
+  background-color: rgba(199, 197, 167, 0.1);
+}
 
 .partner {
   text-align: center;
@@ -264,4 +269,41 @@ table.subnavigator {
 	
 .summary {
 	display: none;
+}
+
+/* -- news -- */
+.news_wrapper {
+  width: 580px;
+  padding: 10px;
+  margin-top: 20px;
+  min-height: 170px;
+  background-color: rgba(199, 197, 167, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(118, 85, 74, 0.5);
+  border-radius: 5px; }
+
+.news_header {
+  border-bottom: solid 1px;
+  border-color: rgba(118, 85, 74, 0.5);
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px; }
+  
+.news_footer {
+  border-top: solid 1px;
+  border-color: rgba(118, 85, 74, 0.5);
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 10px; 
+  height: 2em;
+  
+}
+
+.news_footer .news_author {
+  float: left;
+}
+  
+.news_time {
+  float: right;
 }

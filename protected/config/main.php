@@ -94,9 +94,9 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
 		'nav1'		=> array(
-						'Együttes'	=> 'site/ensemble',
-						'Csoportok'	=> 'group/index',
-						'Támogatók'	=> 'site/partners',
+						'Együttes'	=> array('site/ensemble'),
+						'Csoportok'	=> array('group/index'),
+						'Támogatók'	=> array('site/partners'),
 						//'-width'	=> 100,
 					),
 		'news_path'	=> YiiBase::getPathOfAlias('webroot') . 'assets/news',

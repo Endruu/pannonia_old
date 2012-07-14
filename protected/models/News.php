@@ -171,15 +171,23 @@ class News extends CActiveRecord
 	
 	public function loadText()
 	{
-		if( $text = file_get_contents(Yii::app()->params['news_path'] . '/' . $this->id . ".txt") ) {
-			$digest = md5($text);
-			if($digest == $this->digest) {
-				$this->text = $text;
+		$file = Yii::app()->params['news_path'] . '/' . $this->id . ".txt";
+		if(file_exists($file)) {
+			if( $text = file_get_contents($file) ) {
+				$digest = md5($text);
+				if($digest == $this->digest) {
+					$this->text = $text;
+				} else {
+					Yii::log("Digest mismatch!", 'error', 'news');
+					$this->text = "<p style='color: red'>Hibás fájl!</p>";
+				}
 			} else {
-				Yii::log("Digest mismatch!", 'error', 'news');
+				Yii::log("Can't load file!", 'error', 'news');
+				$this->text = "<p style='color: red'>Üres fájl!</p>";
 			}
 		} else {
-			Yii::log("Can't load file!", 'error', 'news');
+			Yii::log("File missing!", 'error', 'news');
+			$this->text = "<p style='color: red'>Hiányzó fájl!</p>";
 		}
 	}
 }

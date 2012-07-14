@@ -19,14 +19,16 @@ function wSplit($string, $maxlength) {
     return $string;
 }
 
-function subNavigator($link_hash, $current, $width = 100) {
-	$link_hash = Yii::app()->params[$link_hash];
-	echo "<table class='subnavigator'>\n  <tr>\n";
+function subNavigator($link_hash, $current = false, $class = '', $width = 100) {
+	if(is_string($link_hash)) {
+		$link_hash = Yii::app()->params[$link_hash];
+	}
+	echo "<table class='subnavigator $class'>\n  <tr>\n";
 	foreach ($link_hash as $key => $link) {
-		if($current == $key) {
-			echo "    <td width='$width'>", CHtml::link($key, array($link), array('class' => 'current') ), "</td>\n";
+		if($current && $current == $key) {
+			echo "    <td width='$width'>", CHtml::link($key, $link, array('class' => 'current') ), "</td>\n";
 		} else {
-			echo "    <td width='$width'>", CHtml::link($key, array($link) ), "</td>\n";
+			echo "    <td width='$width'>", CHtml::link($key, $link ), "</td>\n";
 		}
 	}
 	echo "  <tr>\n</table>\n";
