@@ -54,3 +54,15 @@ subNavigator('nav1', 'Csoportok');
 		</p>
 	</div>
 </div>
+
+<?php
+	$prev_id = ( $item_cnt + $data->id - 2 ) % $item_cnt + 1;
+	$next_id = $data->id % $item_cnt + 1;
+	subNavigator( array(
+		"<<" => array('view', 'id'=>$prev_id), 
+		">>" => array('view', 'id'=>$next_id),
+		),
+		false,
+		"group_nav"
+	);
+?>

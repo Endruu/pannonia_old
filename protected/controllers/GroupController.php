@@ -7,6 +7,7 @@ class GroupController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $groups;
 
 	/**
 	 * @return array action filters
@@ -50,8 +51,11 @@ class GroupController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$this->cacheGroups();
+		$models = $this->groups->getData();
 		$this->render('view',array(
-			'data'=>$this->loadModel($id),
+			'data'		=> $models[$id-1], //$this->loadModel($id),
+			'item_cnt'	=> $this->groups->totalItemCount,
 		));
 	}
 
@@ -127,6 +131,7 @@ class GroupController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$this->cacheGroups();
 		$dataProvider=new CActiveDataProvider('Group');
 		$dataProvider->setPagination(false);
 		$this->render('index',array(
@@ -174,4 +179,13 @@ class GroupController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	private function cacheGroups($force = false) {
+		if( !$this->groups || $force ) {
+			$this->groups = new CActiveDataProvider('Group');
+			//Yii::trace(CVarDumper::dumpAsString($this->groups->getData()));
+			Yii::trace('GROUPS CACHED!', 'groups');
+		}
+	}
+	
 }
