@@ -6,3 +6,7 @@
 *.jpg
 *.gif
 /protected/extensions/editMe
+/themes
+/protected/yiic.php
+/protected/yiic.bat
+/protected/yiic
