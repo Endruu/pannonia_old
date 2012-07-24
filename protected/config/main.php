@@ -23,13 +23,13 @@ return array(
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		
+		/*
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'admin',
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
-		),
+		),*/
 		
 	),
 
@@ -37,7 +37,7 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+			'allowAutoLogin'=>false,
 		),
 		// uncomment the following to enable URLs in path-format
 		/*
@@ -75,8 +75,8 @@ return array(
 				array(
 					'class'			=> 'CFileLogRoute',
 					'levels'		=> 'trace, error, warning',
-					'maxLogFiles'	=> 3,
-					'maxFileSize'	=> 50,
+					'maxLogFiles'	=> 10,
+					'maxFileSize'	=> 200,
 				),
 				// uncomment the following to show log messages on web pages
 				/*
@@ -92,7 +92,7 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'bibok.andor@gmail.com',
 		'nav1'		=> array(
 						'Együttes'	=> array('site/ensemble'),
 						'Csoportok'	=> array('group/index'),
