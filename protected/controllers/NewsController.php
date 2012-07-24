@@ -64,6 +64,7 @@ class NewsController extends Controller
 	public function actionCreate()
 	{
 		$model=new NewsForm;
+		$this->layout='/layouts/simple';
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -73,6 +74,7 @@ class NewsController extends Controller
 			$model->attributes=$_POST['NewsForm'];
 			if($news_model = $model->save())
 				//$news_model->loadText();
+				$this->layout='/layouts/main';
 				$this->redirect(array('view','id'=>$news_model->id));
 			
 		}

@@ -11,13 +11,6 @@
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 	
-	<?php include 'minime_cal.php'; ?>
-	<?php //include 'e:\xampp\htdocs\pannonia\protected\extensions\ckeditor\ckeditor_php5.php'; ?>
-	<?php //echo CHtml::scriptFile("E:/xampp/htdocs/pannonia/protected/extensions/ckeditor/ckeditor.js"); ?>
-    <!--
-	<script type="text/javascript" src='/pannonia/protected/extensions/ckeditor/ckeditor.js'></script>
-	-->
-	
 	
 </head>
 

@@ -29,8 +29,10 @@ $form=$this->beginWidget('CActiveForm');
 
     <div class="row">
         <?php //echo $form->labelEx($model,'title'); ?>
-        <?php echo $form->textField($model,'title'); ?>
+		Cím: 
+        <?php echo $form->textField($model,'title'); ?> 
         <?php echo $form->error($model,'title'); ?>
+		<br /><br />
     </div>
 
 	<div class="row">
