@@ -1,7 +1,57 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-TRUNCATE TABLE `pannonia`.`user`;
-TRUNCATE TABLE `pannonia`.`group`;
+
+DROP TABLE IF EXISTS `pannonia`.`user`;
+DROP TABLE IF EXISTS `pannonia`.`group`;
+DROP TABLE IF EXISTS `pannonia`.`news`;
+
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `modified_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `flags` char(1) NOT NULL DEFAULT '0',
+  `digest` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_news_user` (`created_by`),
+  KEY `fk_news_user1` (`modified_by`),
+  CONSTRAINT `fk_news_user` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_news_user1` FOREIGN KEY (`modified_by`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `description` text NOT NULL,
+  `rehersals` varchar(45) NOT NULL,
+  `leader1` int(11) NOT NULL,
+  `leader2` int(11) DEFAULT NULL,
+  `image` varchar(15) DEFAULT 'nopic.jpg',
+  PRIMARY KEY (`id`),
+  KEY `fk_group_user1` (`leader1`),
+  KEY `fk_group_user2` (`leader2`),
+  CONSTRAINT `fk_group_user1` FOREIGN KEY (`leader1`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_group_user2` FOREIGN KEY (`leader2`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `group` int(11) DEFAULT NULL,
+  `nick` varchar(10) NOT NULL,
+  `bday` date DEFAULT NULL,
+  `rights` char(1) NOT NULL DEFAULT '0',
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_user_group1` (`group`),
+  CONSTRAINT `fk_user_group1` FOREIGN KEY (`group`) REFERENCES `group` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 
 INSERT INTO `pannonia`.`user`
 (`name`,
