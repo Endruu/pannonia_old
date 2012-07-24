@@ -70,7 +70,7 @@ class News extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'globals' => array(self::HAS_MANY, 'GlobalId', 'news_id'),
+			'globalID' => array(self::HAS_ONE, 'GlobalId', 'news_id'),
 			'author' => array(self::BELONGS_TO, 'User', 'created_by'),
 			'modifier' => array(self::BELONGS_TO, 'User', 'modified_by'),
 		);
@@ -178,16 +178,29 @@ class News extends CActiveRecord
 				if($digest == $this->digest) {
 					$this->text = $text;
 				} else {
-					Yii::log("Digest mismatch!", 'error', 'news');
+					Yii::log("Digest mismatch! ID: $this->id", 'error', 'news');
 					$this->text = "<p style='color: red'>Hibás fájl!</p>";
 				}
 			} else {
-				Yii::log("Can't load file!", 'error', 'news');
+				Yii::log("Can't load file! ID: $this->id", 'error', 'news');
 				$this->text = "<p style='color: red'>Üres fájl!</p>";
 			}
 		} else {
-			Yii::log("File missing!", 'error', 'news');
+			Yii::log("File missing! ID: $this->id", 'error', 'news');
 			$this->text = "<p style='color: red'>Hiányzó fájl!</p>";
 		}
+	}
+	
+	protected function afterSave()
+	{
+		if($this->hasEventHandler('onAfterSave'))
+			$this->onAfterSave(new CEvent($this));
+			
+		if($this->isNewRecord) {
+			$this->globalID->news_id = $this->id;
+			$this->globalID->save();
+			Yii::trace('new global id', 'news');
+		}
+		
 	}
 }
