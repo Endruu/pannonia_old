@@ -26,7 +26,7 @@
 	echo
 		CHtml::link('', array('news/index'), array('class' => 'menu', 'id' => 'news') ), "\n",
 		CHtml::link('', array('site/ensemble'), array('class' => 'menu', 'id' => 'about') ), "\n",
-		CHtml::link('', array('galery/index'), array('class' => 'menu', 'id' => 'galery') ), "\n",
+		CHtml::link('', array('gallery/index'), array('class' => 'menu', 'id' => 'galery') ), "\n",
 		CHtml::link('', array('messageboard/index'), array('class' => 'menu', 'id' => 'messages') ), "\n",
 		CHtml::link('', array('site/contact'), array('class' => 'menu', 'id' => 'contact') ), "\n";
   ?>
