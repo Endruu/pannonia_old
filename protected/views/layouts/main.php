@@ -40,6 +40,9 @@
 		<div class='mcalendar_c'>
 		  <?php mCalendar(); ?>
 		</div>
+                <a href='http://www.trnava.sk/sk/clanok/trnavska-brana-2012-medzinarodny-folklorny-festival' style='height: 39px; margin-top: 20px; margin-left: -13px;'>
+			<img src='<?php echo $bUrl; ?>/images/banner.png' />
+		</a>
 	  </div>
     </div>
 	

@@ -70,7 +70,7 @@ class News extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'globalID' => array(self::HAS_ONE, 'GlobalId', 'news_id'),
+			'global_id' => array(self::HAS_ONE, 'GlobalId', 'news_id'),
 			'author' => array(self::BELONGS_TO, 'User', 'created_by'),
 			'modifier' => array(self::BELONGS_TO, 'User', 'modified_by'),
 		);
@@ -191,6 +191,7 @@ class News extends CActiveRecord
 		}
 	}
 	
+        /*
 	protected function afterSave()
 	{
 		if($this->hasEventHandler('onAfterSave'))
@@ -202,5 +203,5 @@ class News extends CActiveRecord
 			Yii::trace('new global id', 'news');
 		}
 		
-	}
+	}*/
 }
