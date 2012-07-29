@@ -59,7 +59,7 @@ class NewsForm extends CFormModel
 						'FMISSING'	=> false,
 						'DRAFT'		=> false,
 					));
-					if ( $model->update() ) {
+					if ( $model->update(array('flags')) ) {
 						return $model;
 					} else {
 						Yii::log("Can't update text!", 'error','news');

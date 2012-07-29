@@ -11,14 +11,14 @@
  * @property integer $created_by
  * @property integer $modified_by
  * @property string $flags
- * @property string $digest
+ * @property integer $gid
  *
  * The followings are the available model relations:
- * @property GlobalId[] $globals
- * @property User $createdBy
- * @property User $modifiedBy
+ * @property GlobalTag $gTag
+ * @property User $author
+ * @property User $modifier
  */
-class News extends CActiveRecord
+class News extends ARwGid
 {
 
 	public $text;
@@ -70,9 +70,9 @@ class News extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'globalID' => array(self::HAS_ONE, 'GlobalId', 'news_id'),
-			'author' => array(self::BELONGS_TO, 'User', 'created_by'),
-			'modifier' => array(self::BELONGS_TO, 'User', 'modified_by'),
+			'gTag'		=> array(self::BELONGS_TO, 'GlobalTag', 'gid'),
+			'author'	=> array(self::BELONGS_TO, 'User', 'created_by'),
+			'modifier'	=> array(self::BELONGS_TO, 'User', 'modified_by'),
 		);
 	}
 
@@ -112,6 +112,7 @@ class News extends CActiveRecord
 		$criteria->compare('modified_by',$this->modified_by);
 		$criteria->compare('flags',$this->flags,true);
 		$criteria->compare('digest',$this->digest,true);
+		$criteria->compare('gid',$this->gid);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -191,16 +192,4 @@ class News extends CActiveRecord
 		}
 	}
 	
-	protected function afterSave()
-	{
-		if($this->hasEventHandler('onAfterSave'))
-			$this->onAfterSave(new CEvent($this));
-			
-		if($this->isNewRecord) {
-			$this->globalID->news_id = $this->id;
-			$this->globalID->save();
-			Yii::trace('new global id', 'news');
-		}
-		
-	}
 }
