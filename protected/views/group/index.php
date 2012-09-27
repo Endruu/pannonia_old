@@ -7,6 +7,8 @@ $this->menu=array(
 	array('label'=>'Create Group', 'url'=>array('create')),
 	array('label'=>'Manage Group', 'url'=>array('admin')),
 );*/
+$this->setPageTitle('Csoportok');
+
 ?>
 
 <h1>Rólunk</h1>

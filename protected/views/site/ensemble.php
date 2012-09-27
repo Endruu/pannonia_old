@@ -1,6 +1,9 @@
 <h1>Rólunk</h1>
 
-<?php subNavigator('nav1', 'Együttes'); ?>
+<?php
+	subNavigator('nav1', 'Együttes');
+	$this->setPageTitle('Együttes');
+?>
 
 <div class='content'>
 

@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $bUrl; ?>/css/layout.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $bUrl; ?>/css/calendar.css" />
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<title>Pannónia NTE - <?php echo CHtml::encode($this->pageTitle); ?></title>
 	
 	<?php include 'minime_cal.php'; ?>
     

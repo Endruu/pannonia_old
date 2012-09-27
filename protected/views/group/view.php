@@ -30,6 +30,7 @@ $this->menu=array(
 ));*/ 
 
 subNavigator('nav1', 'Csoportok');
+$this->setPageTitle( h($data->name) . ' csoport');
 
 ?>
 

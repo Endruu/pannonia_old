@@ -22,7 +22,7 @@
  * @property News[] $news1
  * @property Group $group0
  */
-class User extends CActiveRecord
+class User extends ARwGid
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -87,12 +87,12 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => 'Teljes név',
 			'email' => 'Email',
 			'created_at' => 'Created At',
-			'group' => 'Group',
-			'nick' => 'Nick',
-			'bday' => 'Bday',
+			'group' => 'Csoport',
+			'nick' => 'Felhasználónév',
+			'bday' => 'Születésnap',
 			'rights' => 'Rights',
 		);
 	}

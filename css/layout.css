@@ -2,7 +2,10 @@ body {
   background-color: #36130D;
   background-image: url(pic/bg_strip.jpg);
   background-repeat: repeat-x;
-  background-attachment: fixed; }
+  background-attachment: fixed;
+  color: #220F0F;
+  
+ }
 
 .anchor {
   width: 1040px;
@@ -171,7 +174,8 @@ h1 {
   width: 600px;
   margin-top: 0px;
   text-align: center;
-  color: #220F0F; }
+  color: #420905; /*#350704; /*#220F0F;*/
+}
 
 p {
   text-align: justify; }
@@ -306,4 +310,36 @@ table.subnavigator {
   
 .news_time {
   float: right;
+}
+
+
+
+label {
+	margin-left: 13px;
+	min-width: 120px;
+	display: inline-block;
+	font-weight: bold;
+}
+.required_star {
+	font-size: 70%;
+	margin-left: -11px;
+	margin-right: 5px;
+}
+
+.row input, .row select {
+	background-color: rgba(199, 197, 167, 0.7);
+	border: 1px solid rgba(118, 85, 74, 0.5);
+	/*border-color: rgba(118, 85, 74, 0.5);*/
+	border-radius: 3px;
+	box-shadow: 1px 1px 3px rgba(118, 85, 74, 0.7);
+	padding-left: 1px;
+}
+.row option {
+	padding-left: 1px;
+	background-color: rgba(199, 197, 167, 0.7);
+	border: 0px solid black;
+}
+
+.row {
+	margin-bottom: 4px;
 }
