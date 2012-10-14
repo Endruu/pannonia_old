@@ -1,3 +1,9 @@
+<?php
+/* @var $this UserController */
+/* @var $model User */
+/* @var $form CActiveForm */
+?>
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -22,18 +28,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'created_at'); ?>
-		<?php echo $form->textField($model,'created_at'); ?>
-		<?php echo $form->error($model,'created_at'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'group'); ?>
-		<?php echo $form->textField($model,'group'); ?>
-		<?php echo $form->error($model,'group'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'nick'); ?>
 		<?php echo $form->textField($model,'nick',array('size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'nick'); ?>
@@ -46,9 +40,21 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'rights'); ?>
-		<?php echo $form->textField($model,'rights',array('size'=>1,'maxlength'=>1)); ?>
-		<?php echo $form->error($model,'rights'); ?>
+		<?php echo $form->labelEx($model,'password'); ?>
+		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>64)); ?>
+		<?php echo $form->error($model,'password'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'gid'); ?>
+		<?php echo $form->textField($model,'gid'); ?>
+		<?php echo $form->error($model,'gid'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'session_token'); ?>
+		<?php echo $form->textField($model,'session_token',array('size'=>16,'maxlength'=>16)); ?>
+		<?php echo $form->error($model,'session_token'); ?>
 	</div>
 
 	<div class="row buttons">

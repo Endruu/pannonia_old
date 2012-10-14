@@ -1,4 +1,7 @@
 <?php
+/* @var $this UserController */
+/* @var $model User */
+
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),

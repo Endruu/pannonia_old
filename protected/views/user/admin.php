@@ -1,4 +1,7 @@
 <?php
+/* @var $this UserController */
+/* @var $model User */
+
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
 	'Manage',
@@ -45,12 +48,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'name',
 		'email',
-		'created_at',
-		'group',
 		'nick',
-		/*
 		'bday',
-		'rights',
+		'password',
+		/*
+		'gid',
+		'session_token',
 		*/
 		array(
 			'class'=>'CButtonColumn',
