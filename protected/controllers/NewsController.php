@@ -72,11 +72,11 @@ class NewsController extends Controller
 		if(isset($_POST['NewsForm']))
 		{
 			$model->attributes=$_POST['NewsForm'];
-			if($news_model = $model->save())
+			if($news_model = $model->save()) {
 				//$news_model->loadText();
 				$this->layout='/layouts/main';
-				$this->redirect(array('view','id'=>$news_model->id));
-			
+				$this->redirect(array('news/view','id' => $news_model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -162,8 +162,8 @@ class NewsController extends Controller
 			array(
 				'criteria'=>array(
 					//'condition'=>'status=1',				
-					'with'=>array('author'=>array('select'=>'id, name'), 'modifier'=>array('select'=>'id, name')),
-					'order'=>'t0_c2 DESC',
+					'with'=>array('gTag', 'gTag.creator', 'gTag.modifier'),
+					'order'=>'created_at DESC',
 				),
 				'pagination'=>array(
 					'pageSize'=>10,

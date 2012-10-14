@@ -51,11 +51,11 @@ class GroupController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->cacheGroups();
-		$models = $this->groups->getData();
+		//$this->cacheGroups();
+		$models = Group::getGroups(true); //$this->groups->getData();
 		$this->render('view',array(
 			'data'		=> $models[$id-1], //$this->loadModel($id),
-			'item_cnt'	=> $this->groups->totalItemCount,
+			'item_cnt'	=> count($models),
 		));
 	}
 
@@ -131,7 +131,6 @@ class GroupController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$this->cacheGroups();
 		$dataProvider=new CActiveDataProvider('Group');
 		$dataProvider->setPagination(false);
 		$this->render('index',array(

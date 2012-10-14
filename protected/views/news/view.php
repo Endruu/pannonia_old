@@ -23,11 +23,6 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'title',
-		'created_at',
-		'modified_at',
-		'created_by',
-		'modified_by',
-		'flags',
 		'digest',
 		'text'
 	),
