@@ -6,11 +6,8 @@
  * The followings are the available columns in table 'news':
  * @property integer $id
  * @property string $title
- * @property string $created_at
- * @property string $modified_at
- * @property integer $created_by
- * @property integer $modified_by
  * @property string $flags
+ * @property string $digest
  * @property integer $gid
  *
  * The followings are the available model relations:
@@ -22,6 +19,10 @@ class News extends ARwGid
 {
 
 	public $text;
+	public $author;
+	public $created_at;
+	public $modifier	= null;
+	public $modified_at	= null;
 	
 	
 	/**
@@ -42,56 +43,49 @@ class News extends ARwGid
 		return 'news';
 	}
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('title, created_at, created_by, digest', 'required'),
-			array('created_by, modified_by', 'numerical', 'integerOnly'=>true),
-			array('title', 'length', 'max'=>50),
-			array('flags', 'length', 'max'=>1),
-			array('digest', 'length', 'max'=>32),
-			array('modified_at', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, title, created_at, modified_at, created_by, modified_by, flags, digest', 'safe', 'on'=>'search'),
-		);
-	}
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules()
+    {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            array('title, digest', 'required'),
+            array('gid', 'numerical', 'integerOnly'=>true),
+            array('title', 'length', 'max'=>50),
+            array('digest', 'length', 'max'=>32),
+            // The following rule is used by search().
+            // Please remove those attributes that should not be searched.
+            array('id, title, digest, gid', 'safe', 'on'=>'search'),
+        );
+    }
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'gTag'		=> array(self::BELONGS_TO, 'GlobalTag', 'gid'),
-			'author'	=> array(self::BELONGS_TO, 'User', 'created_by'),
-			'modifier'	=> array(self::BELONGS_TO, 'User', 'modified_by'),
-		);
-	}
+    /**
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'gTag' => array(self::BELONGS_TO, 'GlobalTag', 'gid'),
+        );
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'title' => 'Title',
-			'created_at' => 'Created At',
-			'modified_at' => 'Modified At',
-			'created_by' => 'Created By',
-			'modified_by' => 'Modified By',
-			'flags' => 'Flags',
-			'digest' => 'Digest',
-		);
-	}
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+        return array(
+            'id' => 'ID',
+            'title' => 'Cím',
+            'flags' => 'Flags',
+            'digest' => 'Digest',
+            'gid' => 'Gid',
+        );
+    }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -104,70 +98,15 @@ class News extends ARwGid
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('created_at',$this->created_at,true);
-		$criteria->compare('modified_at',$this->modified_at,true);
-		$criteria->compare('created_by',$this->created_by);
-		$criteria->compare('modified_by',$this->modified_by);
-		$criteria->compare('flags',$this->flags,true);
-		$criteria->compare('digest',$this->digest,true);
-		$criteria->compare('gid',$this->gid);
+        $criteria->compare('id',$this->id);
+        $criteria->compare('title',$this->title,true);
+        $criteria->compare('flags',$this->flags,true);
+        $criteria->compare('digest',$this->digest,true);
+        $criteria->compare('gid',$this->gid);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-	
-	private $flag_fields = array(
-		'FVALID'	=> 0,
-		'FMISSING'	=> 1,
-		'DRAFT'		=> 7,
-	);
-	
-	public function initFlags() {
-		$this->setFlags( array (
-			'FVALID'	=> true,
-			'FMISSING'	=> true,
-			'DRAFT'		=> true,
-		));
-	}
-	
-	public function setFlags($flags) {
-		foreach( array_keys($flags) as $flag ) {
-			if( array_key_exists($flag, $this->flag_fields) ) {
-				if( $flags[$flag] ) {
-					$this->flags |= chr(pow(2,$this->flag_fields[$flag]));
-				} else {
-					$this->flags &= ~chr(pow(2,$this->flag_fields[$flag]));
-				}
-			}
-		}
-		
-	}
-	
-	public function getFlags($which = false) {
-		if($which) {
-			if( array_key_exists($which, $this->flag_fields) ) {
-				if( $this->flags & pow(2, $this->flag_fields[$which]) ) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return null;
-			}
-		} else {
-			$ret = array();
-			foreach( array_keys($this->flag_fields) as $flag ) {
-				if( $this->flags & pow(2, $this->flag_fields[$flag]) ) {
-					$ret[$flag] = true;
-				} else {
-					$ret[$flag] = false;
-				}
-			}
-			return $ret;
-		}
 	}
 	
 	public function loadText()
@@ -190,6 +129,22 @@ class News extends ARwGid
 			Yii::log("File missing! ID: $this->id", 'error', 'news');
 			$this->text = "<p style='color: red'>Hiányzó fájl!</p>";
 		}
+	}
+	
+	protected function afterFind()
+	{
+	
+		$this->author		= $this->gTag->creator;
+		$this->created_at	= $this->gTag->created_at;
+		
+		if($this->gTag->modified_by) {
+			$this->modifier		= $this->gTag->modifier;
+			$this->modified_at	= $this->gTag->modified_at;
+		}
+	
+		if($this->hasEventHandler('onAfterFind'))
+			$this->onAfterFind(new CEvent($this));
+			
 	}
 	
 }

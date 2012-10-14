@@ -68,7 +68,7 @@ class Group extends ARwGid
 			'gTag'		=> array(self::BELONGS_TO, 'GlobalTag', 'gid'),
 			'r_leader1' => array(self::BELONGS_TO, 'User', 'leader1'),
 			'r_leader2' => array(self::BELONGS_TO, 'User', 'leader2'),
-			'users' => array(self::HAS_MANY, 'User', 'group'),
+            'users' => array(self::MANY_MANY, 'User', 'group_user(group_id, user_id)'),
 		);
 	}
 
@@ -110,5 +110,26 @@ class Group extends ARwGid
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public static function getGroups($full = false) {
+		$criteria = new CDbCriteria;
+		$criteria->compare('id', '< 10');
+		
+		$dp = new CActiveDataProvider('Group', array( 'criteria'=>$criteria ));
+		
+		$groups = $dp->getData();
+		if($full) return $groups;
+		
+		$return = array();
+		foreach($groups as $g) {
+			$return[$g->id] = $g->name;
+		}
+		
+		return $return;
+	}
+	
+	public function addUser($user_id) {
+		GroupUserAssoc::saveIfNew($this->id, $user_id);		
 	}
 }
