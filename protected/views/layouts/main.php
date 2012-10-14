@@ -8,6 +8,8 @@
 	<?php $bUrl =  Yii::app()->request->baseUrl; ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $bUrl; ?>/css/layout.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $bUrl; ?>/css/calendar.css" />
+	
+	<link rel="shortcut icon" href="<?php echo $bUrl ?>/images/favicon.ico">
 
 	<title>Pannónia NTE - <?php echo CHtml::encode($this->pageTitle); ?></title>
 	
@@ -38,7 +40,10 @@
 	  <div class='right_content_c'>
 		<img src='<?php echo $bUrl; ?>/css/pic/logo.png' class='logo_c' />
 		<div class='mcalendar_c'>
-		  <?php mCalendar(); ?>
+		  <?php	mCalendar(); ?>
+		</div>
+		<div id="session-control">
+		  <?php	include 'protected/views/session/view.php'; ?>
 		</div>
 	  </div>
     </div>

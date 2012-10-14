@@ -294,6 +294,10 @@ table.subnavigator {
   padding-bottom: 10px;
   padding-left: 10px; }
   
+.news_header h2 {
+	margin-bottom: 8px;
+	margin-top: 12px;
+}
 .news_footer {
   border-top: solid 1px;
   border-color: rgba(118, 85, 74, 0.5);
@@ -324,6 +328,7 @@ label {
 	font-size: 70%;
 	margin-left: -11px;
 	margin-right: 5px;
+	color: rgba(0, 0, 0, 0.6);
 }
 
 .row input, .row select {
@@ -333,6 +338,7 @@ label {
 	border-radius: 3px;
 	box-shadow: 1px 1px 3px rgba(118, 85, 74, 0.7);
 	padding-left: 1px;
+	width: 160px;
 }
 .row option {
 	padding-left: 1px;
@@ -342,4 +348,50 @@ label {
 
 .row {
 	margin-bottom: 4px;
+}
+
+#user-form input.error {
+	background-color: rgba(198, 183, 167, 0.7);
+	border: 1px solid rgba(255, 50, 50, 0.5);
+}
+
+#user-form .errorMessage {
+	/*background-color: rgba(198, 167, 167, 0.7);
+	border: 1px solid red;*/
+	color: rgba(200, 25, 25, 0.9);
+	margin-left: 140px;
+	margin-top: 4px;
+	margin-bottom: 8px;
+	font-size: 90%;
+}
+
+#session-control {
+	margin-top: 10px;
+	width: 126px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 4px;
+	padding-left: 7px;
+	padding-right: 5px;
+	display: table;
+	border: 1px solid;
+	border-radius: 7px;
+	border-color: rgba(150, 52, 44, 0.5);
+	background-color: rgba(199, 197, 167, 0.2);
+}
+
+#session-control .main, #session-control .sub {
+	color: black;
+	text-decoration: none;
+	font-size: 80%;
+	padding: 2px;
+}
+
+#session-control .main {
+	font-size: 90%;
+	font-weight: bold;
+}
+
+#session-control .main:hover, #session-control .sub:hover {
+	text-decoration: underline;
 }
