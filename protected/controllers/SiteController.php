@@ -43,4 +43,26 @@ class SiteController extends Controller
 		$this->render('ensemble');
 	}
 	
+	//csak a migráció idejére legyen elérhetõ, amúgy kikommentelve
+	public function actionMigrate() { $this->runMigrations(); }
+	
+	private function runMigrations() {
+		$commandPath = Yii::app()->getBasePath() . DIRECTORY_SEPARATOR . 'commands';
+		$runner = new CConsoleCommandRunner();
+		$runner->addCommands($commandPath);
+		$commandPath = Yii::getFrameworkPath() . DIRECTORY_SEPARATOR . 'cli' . DIRECTORY_SEPARATOR . 'commands';
+		$runner->addCommands($commandPath);
+		$args_history = array('yiic', 'migrate', 'history', '--interactive=0');
+		$args_migrate = array('yiic', 'migrate', '--interactive=0');
+		ob_start();
+		$runner->run($args_history);
+		$runner->run($args_migrate);
+		echo preg_replace(
+			array("/\n/", "/  /"),
+			array("<br />", "&nbsp;&nbsp;"),
+			htmlentities(ob_get_clean(), null, Yii::app()->charset)
+		);
+		
+	}
+	
 }

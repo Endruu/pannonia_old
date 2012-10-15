@@ -20,10 +20,11 @@ class m121011_140321_seed extends CDbMigration
 			));
 			
 			$this->insert('user', array(
-				'id'	=> $id,
-				'gid'	=> $gid,
-				'name'	=> $u,
-				'nick'	=> '_0_' . substr($u, 0, 3) . $id . '_0_',
+				'id'		=> $id,
+				'gid'		=> $gid,
+				'name'		=> $u,
+				'nick'		=> '_0_' . substr($u, 0, 3) . $id . '_0_',
+				'password'	=> crypt('default', Randomness::blowfishSalt()),
 			));
 		}
 		
@@ -48,6 +49,10 @@ class m121011_140321_seed extends CDbMigration
 				'image'			=> $g[5],
 			));
 		}
+		
+		$this->execute("ALTER TABLE `global_tag` AUTO_INCREMENT=51");
+		$this->execute("ALTER TABLE `user` AUTO_INCREMENT=21");
+		$this->execute("ALTER TABLE `group` AUTO_INCREMENT=21");
 		
 		$this->execute("SET FOREIGN_KEY_CHECKS=1");
 		
