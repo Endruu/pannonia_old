@@ -1,4 +1,7 @@
 <?php
+/* @var $this UserController */
+/* @var $model User */
+
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
 	$model->name,
@@ -21,10 +24,10 @@ $this->menu=array(
 		'id',
 		'name',
 		'email',
-		'created_at',
-		'group',
 		'nick',
 		'bday',
-		'rights',
+		'password',
+		'gid',
+		'session_token',
 	),
 )); ?>

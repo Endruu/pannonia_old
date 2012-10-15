@@ -27,11 +27,11 @@ class NewsController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','preview'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','preview'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -72,11 +72,11 @@ class NewsController extends Controller
 		if(isset($_POST['NewsForm']))
 		{
 			$model->attributes=$_POST['NewsForm'];
-			if($news_model = $model->save())
+			if($news_model = $model->save()) {
 				//$news_model->loadText();
 				$this->layout='/layouts/main';
-				$this->redirect(array('view','id'=>$news_model->id));
-			
+				$this->redirect(array('news/view','id' => $news_model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -158,7 +158,19 @@ class NewsController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('News');
+		$dataProvider=new CActiveDataProvider('News',
+			array(
+				'criteria'=>array(
+					//'condition'=>'status=1',				
+					'with'=>array('gTag', 'gTag.creator', 'gTag.modifier'),
+					'order'=>'created_at DESC',
+				),
+				'pagination'=>array(
+					'pageSize'=>10,
+				)
+			)
+		);
+		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -186,6 +198,7 @@ class NewsController extends Controller
 	 */
 	public function loadModel($id)
 	{
+		Yii::trace("id: $id", 'news');
 		$model=News::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');

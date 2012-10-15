@@ -1,5 +1,8 @@
 <h1>Rólunk</h1> 
-<?php subNavigator('nav1', 'Támogatók'); ?>   
+<?php
+	subNavigator('nav1', 'Támogatók');
+	$this->setPageTitle('Támogatók');
+?>   
 
 <div class='content'>
 

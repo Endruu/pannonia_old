@@ -1,3 +1,9 @@
+<?php
+/* @var $this UserController */
+/* @var $model User */
+/* @var $form CActiveForm */
+?>
+
 <div class="wide form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -21,16 +27,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'created_at'); ?>
-		<?php echo $form->textField($model,'created_at'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'group'); ?>
-		<?php echo $form->textField($model,'group'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'nick'); ?>
 		<?php echo $form->textField($model,'nick',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
@@ -41,8 +37,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'rights'); ?>
-		<?php echo $form->textField($model,'rights',array('size'=>1,'maxlength'=>1)); ?>
+		<?php echo $form->label($model,'gid'); ?>
+		<?php echo $form->textField($model,'gid'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'session_token'); ?>
+		<?php echo $form->textField($model,'session_token',array('size'=>16,'maxlength'=>16)); ?>
 	</div>
 
 	<div class="row buttons">

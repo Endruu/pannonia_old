@@ -11,14 +11,15 @@
  * @property integer $leader1
  * @property integer $leader2
  * @property string $image
+ * @property integer $gid
  *
  * The followings are the available model relations:
- * @property GlobalId[] $globals
+ * @property GlobalTag $gTag
  * @property User $leader10
  * @property User $leader20
  * @property User[] $users
  */
-class Group extends CActiveRecord
+class Group extends ARwGid
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -64,10 +65,10 @@ class Group extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'globals' => array(self::HAS_MANY, 'GlobalId', 'group_id'),
+			'gTag'		=> array(self::BELONGS_TO, 'GlobalTag', 'gid'),
 			'r_leader1' => array(self::BELONGS_TO, 'User', 'leader1'),
 			'r_leader2' => array(self::BELONGS_TO, 'User', 'leader2'),
-			'users' => array(self::HAS_MANY, 'User', 'group'),
+            'users' => array(self::MANY_MANY, 'User', 'group_user(group_id, user_id)'),
 		);
 	}
 
@@ -109,5 +110,26 @@ class Group extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public static function getGroups($full = false) {
+		$criteria = new CDbCriteria;
+		$criteria->compare('id', '< 10');
+		
+		$dp = new CActiveDataProvider('Group', array( 'criteria'=>$criteria ));
+		
+		$groups = $dp->getData();
+		if($full) return $groups;
+		
+		$return = array();
+		foreach($groups as $g) {
+			$return[$g->id] = $g->name;
+		}
+		
+		return $return;
+	}
+	
+	public function addUser($user_id) {
+		GroupUserAssoc::saveIfNew($this->id, $user_id);		
 	}
 }

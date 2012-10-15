@@ -7,22 +7,15 @@
  * @property integer $id
  * @property string $name
  * @property string $email
- * @property string $created_at
- * @property integer $group
  * @property string $nick
  * @property string $bday
- * @property string $rights
+ * @property string $password
+ * @property integer $gid
+ * @property string $session_token
  *
- * The followings are the available model relations:
- * @property GlobalId[] $globals
- * @property Group[] $groups
- * @property Group[] $groups1
- * @property Message[] $messages
- * @property News[] $news
- * @property News[] $news1
- * @property Group $group0
+
  */
-class User extends CActiveRecord
+class User extends ARwGid
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -50,15 +43,14 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, created_at, nick', 'required'),
-			array('group', 'numerical', 'integerOnly'=>true),
+			array('name, nick, email', 'required'),
+			array('gid', 'numerical', 'integerOnly'=>true),
 			array('name, email', 'length', 'max'=>45),
 			array('nick', 'length', 'max'=>10),
-			array('rights', 'length', 'max'=>1),
 			array('bday', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, email, created_at, group, nick, bday, rights', 'safe', 'on'=>'search'),
+			array('id, name, email, nick, bday', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,13 +62,12 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'globals' => array(self::HAS_MANY, 'GlobalId', 'user_id'),
-			'groups' => array(self::HAS_MANY, 'Group', 'leader1'),
-			'groups1' => array(self::HAS_MANY, 'Group', 'leader2'),
+			'creator' => array(self::HAS_MANY, 'GlobalTag', 'created_by'),
+			'modifier' => array(self::HAS_MANY, 'GlobalTag', 'modified_by'),
+			'groups' => array(self::MANY_MANY, 'Group', 'group_user(user_id, group_id)'),
+			'groups1' => array(self::HAS_MANY, 'Group', 'leader2'),	//???
 			'messages' => array(self::HAS_MANY, 'Message', 'sender'),
-			'news' => array(self::HAS_MANY, 'News', 'created_by'),
-			'news1' => array(self::HAS_MANY, 'News', 'modified_by'),
-			'group0' => array(self::BELONGS_TO, 'Group', 'group'),
+			'gTag' => array(self::BELONGS_TO, 'GlobalTag', 'gid'),
 		);
 	}
 
@@ -87,13 +78,11 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => 'Teljes név',
 			'email' => 'Email',
-			'created_at' => 'Created At',
-			'group' => 'Group',
-			'nick' => 'Nick',
-			'bday' => 'Bday',
-			'rights' => 'Rights',
+           	'password' => 'Jelszó',
+			'nick' => 'Felhasználónév',
+			'bday' => 'Születésnap',
 		);
 	}
 
@@ -111,14 +100,18 @@ class User extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('created_at',$this->created_at,true);
-		$criteria->compare('group',$this->group);
 		$criteria->compare('nick',$this->nick,true);
 		$criteria->compare('bday',$this->bday,true);
-		$criteria->compare('rights',$this->rights,true);
+		$criteria->compare('password',$this->password,true);
+		$criteria->compare('gid',$this->gid);
+		$criteria->compare('session_token',$this->session_token,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function addToGroup($group_id) {
+		GroupUserAssoc::saveIfNew($group_id, $this->id);		
 	}
 }

@@ -8,8 +8,10 @@
 	<?php $bUrl =  Yii::app()->request->baseUrl; ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $bUrl; ?>/css/layout.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $bUrl; ?>/css/calendar.css" />
+	
+	<link rel="shortcut icon" href="<?php echo $bUrl ?>/images/favicon.ico">
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<title>Pannónia NTE - <?php echo CHtml::encode($this->pageTitle); ?></title>
 	
 	<?php include 'minime_cal.php'; ?>
     
@@ -26,7 +28,7 @@
 	echo
 		CHtml::link('', array('news/index'), array('class' => 'menu', 'id' => 'news') ), "\n",
 		CHtml::link('', array('site/ensemble'), array('class' => 'menu', 'id' => 'about') ), "\n",
-		CHtml::link('', array('galery/index'), array('class' => 'menu', 'id' => 'galery') ), "\n",
+		CHtml::link('', array('gallery/index'), array('class' => 'menu', 'id' => 'galery') ), "\n",
 		CHtml::link('', array('messageboard/index'), array('class' => 'menu', 'id' => 'messages') ), "\n",
 		CHtml::link('', array('site/contact'), array('class' => 'menu', 'id' => 'contact') ), "\n";
   ?>
@@ -38,7 +40,10 @@
 	  <div class='right_content_c'>
 		<img src='<?php echo $bUrl; ?>/css/pic/logo.png' class='logo_c' />
 		<div class='mcalendar_c'>
-		  <?php mCalendar(); ?>
+		  <?php	mCalendar(); ?>
+		</div>
+		<div id="session-control">
+		  <?php	include 'protected/views/session/view.php'; ?>
 		</div>
                 <a href='http://www.trnava.sk/sk/clanok/trnavska-brana-2012-medzinarodny-folklorny-festival' style='height: 39px; margin-top: 20px; margin-left: -13px;'>
 			<img src='<?php echo $bUrl; ?>/images/banner.png' />

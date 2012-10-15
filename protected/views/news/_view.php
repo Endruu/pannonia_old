@@ -19,10 +19,10 @@
 
 		<div class="news_author">
 			<?php
-				if($data->modified_by)
+				if($data->modifier)
 					echo "Eredeti: ";
 				eh($data->author->name); 
-				if($data->modified_by) {
+				if($data->modifier) {
 					echo "<br />\nLegutóbb módosítva:\n";
 					eh($data->modifier->name);
 				}

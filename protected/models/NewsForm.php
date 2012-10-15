@@ -44,36 +44,26 @@ class NewsForm extends CFormModel
 		Yii::trace($save_path, 'news');
 		
 		if( file_put_contents( "$save_path/_temp.txt", $this->text ) ) {
-			$digest = md5( $this->text );
-			$model = new News;
+			$digest	= md5( $this->text );
+			$model	= new News;
+			
 			$model->setAttributes( array(
 				'title'		 => $this->title,
 				'digest'	 => $digest,
-				'created_by' => 1, //$this->user,
-				'created_at' => new CDbExpression('NOW()'),
 			));
-			$model->initFlags();
+			
 			if( $model->save() ) {
-				if( rename( "$save_path/_temp.txt", $save_path . '/' . $model->id . ".txt") ) {
-					$model->setFlags(array(
-						'FMISSING'	=> false,
-						'DRAFT'		=> false,
-					));
-					if ( $model->update() ) {
-						return $model;
-					} else {
-						Yii::log("Can't update text!", 'error','news');
-						return 0;
-					}
-				} else {
+				if( !rename( "$save_path/_temp.txt", $save_path . '/' . $model->id . ".txt") ) {
+					$model->gTag->flags->valid = false;
+					$model->gTag->save();
 					Yii::log("Can't rename text!", 'error', 'news');
 					return 0;
 				}
+				return $model;
 			} else {
 				Yii::log("Can't save model!", 'error', 'news');
 				if($model->hasErrors()) {
 					Yii::log(CVarDumper::dumpAsString($model->getErrors()), 'error', 'news');
-					Yii::log($model->flags, 'error', 'news');
 				}
 				return 0;
 			}

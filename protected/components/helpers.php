@@ -8,6 +8,10 @@ function eh($in) {
 	echo CHtml::encode($in), "\n";
 }
 
+function br() {
+	echo "<br />\n";
+}
+
 function wSplit($string, $maxlength) {
     $string = substr($string, 0, $maxlength+1);
     if(preg_match('/\s$/', $string) == 1) {
