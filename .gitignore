@@ -12,3 +12,4 @@
 /protected/yiic
 
 /protected/config/_secret.php
+/protected/config/secret.php
