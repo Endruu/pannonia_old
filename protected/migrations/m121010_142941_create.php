@@ -18,7 +18,7 @@ class m121010_142941_create extends CDbMigration
 			"created_by"  => "int(11) NOT NULL DEFAULT '1'",
 			"modified_by" => "int(11)",
 			"flagchar"    => "char(1) DEFAULT '0'",
-		), "AUTO_INCREMENT=1");
+		), "ENGINE=InnoDB AUTO_INCREMENT=1");
 
 		//Create table for group
 		$this->createTable("group", array(
@@ -30,28 +30,29 @@ class m121010_142941_create extends CDbMigration
 			"leader2"     => "int(11)",
 			"image"       => "varchar(15) DEFAULT 'nopic.jpg'",
 			"gid"         => "int(11) NOT NULL",
-		), "AUTO_INCREMENT=1");
+		), "ENGINE=InnoDB AUTO_INCREMENT=1");
 
 		//Create table for group_user
 		$this->createTable("group_user", array(
 			"group_id" => "int(11) NOT NULL",
 			"user_id"  => "int(11) NOT NULL",
-		), "");
+		), "ENGINE=InnoDB");
 
 		//Create table for login_log
 		$this->createTable("login_log", array(
 			"date"    => "timestamp NOT NULL",
 			"user_id" => "int(11) NOT NULL",
-		), "");
+		), "ENGINE=InnoDB");
 
 		//Create table for message
 		$this->createTable("message", array(
 			"id"       => "pk",
 			"recipent" => "int(11) NOT NULL",
 			"sender"   => "int(11) NOT NULL",
+			"flags"    => "char(1) NOT NULL DEFAULT '0'",
 			"message"  => "varchar(255) NOT NULL",
 			"gid"      => "int(11) NOT NULL",
-		), "AUTO_INCREMENT=1");
+		), "ENGINE=InnoDB AUTO_INCREMENT=1");
 
 		//Create table for news
 		$this->createTable("news", array(
@@ -59,7 +60,7 @@ class m121010_142941_create extends CDbMigration
 			"title"  => "varchar(50) NOT NULL",
 			"digest" => "varchar(32) NOT NULL",
 			"gid"    => "int(11) NOT NULL",
-		), "AUTO_INCREMENT=1");
+		), "ENGINE=InnoDB AUTO_INCREMENT=1");
 
 		//Create table for user
 		$this->createTable("user", array(
@@ -71,7 +72,7 @@ class m121010_142941_create extends CDbMigration
 			"password"      => "varchar(64) NOT NULL",
 			"gid"           => "int(11) NOT NULL",
 			"session_token" => "char(16)",
-		), "AUTO_INCREMENT=1");
+		), "ENGINE=InnoDB AUTO_INCREMENT=1");
 
 
 		/** -------------  CREATING KEYS  ------------- **/

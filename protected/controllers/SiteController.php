@@ -44,16 +44,16 @@ class SiteController extends Controller
 	}
 	
 	//csak a migráció idejére legyen elérhetõ, amúgy kikommentelve
-	public function actionMigrate() { $this->runMigrations(); }
+	public function actionMigrate($down = 0) { $this->runMigrations($down); }
 	
-	private function runMigrations() {
+	private function runMigrations($down) {
 		$commandPath = Yii::app()->getBasePath() . DIRECTORY_SEPARATOR . 'commands';
 		$runner = new CConsoleCommandRunner();
 		$runner->addCommands($commandPath);
 		$commandPath = Yii::getFrameworkPath() . DIRECTORY_SEPARATOR . 'cli' . DIRECTORY_SEPARATOR . 'commands';
 		$runner->addCommands($commandPath);
 		$args_history = array('yiic', 'migrate', 'history', '--interactive=0');
-		$args_migrate = array('yiic', 'migrate', '--interactive=0');
+		$args_migrate = $down ? array('yiic', 'migrate', 'down', $down, '--interactive=0') : array('yiic', 'migrate', '--interactive=0');
 		ob_start();
 		$runner->run($args_history);
 		$runner->run($args_migrate);
