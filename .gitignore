@@ -10,3 +10,8 @@
 /protected/yiic.php
 /protected/yiic.bat
 /protected/yiic
+
+/protected/config/_secret.php
+/protected/config/secret.php
+/_yii
+
