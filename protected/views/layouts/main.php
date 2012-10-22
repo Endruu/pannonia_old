@@ -28,7 +28,7 @@
 	echo
 		CHtml::link('', array('news/index'), array('class' => 'menu', 'id' => 'news') ), "\n",
 		CHtml::link('', array('site/ensemble'), array('class' => 'menu', 'id' => 'about') ), "\n",
-		CHtml::link('', array('gallery/index'), array('class' => 'menu', 'id' => 'galery') ), "\n",
+		CHtml::link('', array('site/gallery'), array('class' => 'menu', 'id' => 'galery') ), "\n",
 		CHtml::link('', array('messageboard/index'), array('class' => 'menu', 'id' => 'messages') ), "\n",
 		CHtml::link('', array('site/contact'), array('class' => 'menu', 'id' => 'contact') ), "\n";
   ?>
@@ -42,7 +42,7 @@
 		<div class='mcalendar_c'>
 		  <?php	mCalendar(); ?>
 		</div>
-		<div id="session-control">
+		<div id="session-control" style="display: none">
 		  <?php	include 'protected/views/session/view.php'; ?>
 		</div>
                 <a href='http://www.trnava.sk/sk/clanok/trnavska-brana-2012-medzinarodny-folklorny-festival' style='height: 39px; margin-top: 20px; margin-left: -13px;'>
