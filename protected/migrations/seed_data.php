@@ -9,7 +9,7 @@ $users = array(
 	'Urbán Barbara',
 	'Liska Zsófia',
 	'Szilágyi Zsolt',
-	'Greguss Gergő',
+	'Kelemen Zsuzsanna',
 );
 
 $groups = array(
@@ -57,7 +57,7 @@ $groups = array(
 		'Szüvellő',
 		'Csoportjaink között üde színfolt ez a társaság. Olyan lelkes, táncolni vágyó szülőkből alakult, akik gyermekük táncos pályafutását látva szintén kedvet kaptak a tánctanuláshoz. Próbáikon, táncalkalmaikon nem készülnek színpadi bemutatókra, csak a táncolás öröméért járnak össze. A tagok buzgó résztvevői táncházainknak, ahol ők is megmutatják, milyen táncokkal is ismerkedtek már meg.',
 		'csütörtök 19:00-21:00; Civil-ház',
-		7,	//Gergő
+		8,	//Zsuzsi
 		null,
 		'szuvello.jpg'
 	),

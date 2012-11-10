@@ -2,7 +2,7 @@
 
 class m121011_140321_seed extends CDbMigration
 {
-	public function up()
+	public function safeUp()
 	{
 		include "seed_data.php";
 		
@@ -58,7 +58,7 @@ class m121011_140321_seed extends CDbMigration
 		
 	}
 
-	public function down()
+	public function safeDown()
 	{
 		$this->execute("SET FOREIGN_KEY_CHECKS=0");
 		
@@ -69,14 +69,4 @@ class m121011_140321_seed extends CDbMigration
 		$this->execute("SET FOREIGN_KEY_CHECKS=1");
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }
